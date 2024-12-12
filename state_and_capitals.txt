@@ -4,11 +4,11 @@ AZ,Phoenix
 AR,Little Rock
 CA,Sacramento
 CO,Denver
-CT,Hartford<br>
+CT,Hartford
 DE,Dover
 HI,Honolulu
 FL,Tallahassee
-GA,Atlanta<br>
+GA,Atlanta
 ID,Boise
 IL,Springfield
 IN,Indianapolis

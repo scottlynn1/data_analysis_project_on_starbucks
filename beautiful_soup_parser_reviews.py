@@ -12,3 +12,4 @@ for rating, date, review in zip(review_ratings, review_dates, reviews):
     print(rating['aria-label'])
     print(date.string)
     print (re.sub('\<.*?\>', '', string))
+
