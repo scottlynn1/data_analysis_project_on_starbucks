@@ -12,19 +12,8 @@ AUTH = environ.get('AUTH', default='brd-customer-hl_3e287db4-zone-scraping_brows
 with open('./state_and_capitals.txt', 'r') as file:
         for line in file:
             capitals_list.append(line)
-TARGET_URL = environ.get('TARGET_URL', default='https://www.yelp.com/search?choq=1&find_desc=starbucks&find_loc=Montgomery%2C+AL%2C+United+States')
-'''
-capitals_list = []
-with open('./state_and_capitals.txt', 'r') as file:
-    for line in file:
-        capitals_list.append(line)
-for line in capitals_list:
-    state, city = line.split(',')
-    city = city.replace(' ', '+')
-    city = city.replace('\n', '')
-    TARGET_URL = environ.get('TARGET_URL', default=f'https://www.yelp.com/search?choq=1&find_desc=starbucks&find_loc={city}%2C+{state}%2C+United+States')
-'''
-def scrape(url=TARGET_URL):
+
+def scrape(url):
     if AUTH == 'USER:PASS':
         raise Exception('Provide Scraping Browsers credentials in AUTH ' +
                         'environment variable or update the script.')
@@ -43,19 +32,22 @@ def scrape(url=TARGET_URL):
                 'cmd': 'Captcha.waitForSolve',
                 'params': {'detectTimeout': 10 * 1000},
             })
-            #while status == 'solve_failed'
             status = result['value']['status']
             print(f'Captcha status: {status}')
         while True:
+            print('finding link elements')
             links = driver.find_elements(By.NAME, 'Starbucks')
             with open('links.txt', 'a') as file:
                 for link in links:
                     file.write("%s\n" % link.get_attribute("outerHTML"))
+            print('link elements written to file')
             try:
+                print('searching for "next" page')
                 next_button = driver.find_element(By.CLASS_NAME, 'next-link')
                 next_button = next_button.get_attribute("href")
                 status = 'solve_failed'
                 while status == 'solve_failed':
+                    print(f'Connected! Navigating to {next_button}...')
                     driver.get(next_button)
                     print('Navigated! Waiting captcha to detect and solve...')
                     result = driver.execute('executeCdpCommand', {
@@ -72,12 +64,10 @@ def scrape(url=TARGET_URL):
 
 
 if __name__ == '__main__':
-    with open('./state_and_capitals.txt', 'r') as file:
-        for line in file:
-            capitals_list.append(line)
     for line in capitals_list:
         state, city = line.split(',')
         city = city.replace(' ', '+')
         city = city.replace('\n', '')
         TARGET_URL = environ.get('TARGET_URL', default=f'https://www.yelp.com/search?choq=1&find_desc=starbucks&find_loc={city}%2C+{state}%2C+United+States')
-        scrape()
+        print(f'scraping {TARGET_URL}')
+        scrape(TARGET_URL)
