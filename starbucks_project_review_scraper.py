@@ -53,7 +53,12 @@ def scrape(store):
         while True:
             print('pulling review information')
             driver.implicitly_wait(3)
-            content = driver.find_element(By.ID, 'main-content').get_attribute('innerHTML')
+            try:
+                content = driver.find_element(By.ID, 'main-content').get_attribute('innerHTML')
+            except NoSuchElementException:
+                print('could not find main tag, searching parent')
+                driver.implicitly_wait(3)
+                content = driver.find_element(By.CLASS_NAME, 'y-css-13kng0r').get_attribute('innerHTML')
             soup = BeautifulSoup(content, 'html.parser')
             address = soup.find('address').find_all('span')[-1:]
             address = address[0].string
