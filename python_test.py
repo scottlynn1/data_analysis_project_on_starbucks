@@ -1,5 +1,21 @@
-import sys
 
-print(sys.argv[1])
-print(sys.argv[2])
-https://www.yelp.com/biz/starbucks-phoenix-56?osq=starbucks&start=120
+number = 1
+stores = ['a,', 'b', 'c', 'd', 'e']
+
+
+stores = stores[number:]
+last_store = stores[0]
+def scrape(store):
+    global last_store 
+    last_store = store
+
+
+for i, store in enumerate(stores):
+    number = i
+    print(last_store)
+    scrape(store)
+    print(last_store)
+
+
+
+#https://www.yelp.com/biz/starbucks-surprise-17?osq=starbucks&start=10

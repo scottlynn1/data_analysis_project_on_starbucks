@@ -11,6 +11,7 @@ import sys
 
 AUTH = environ.get('AUTH', default='brd-customer-hl_3e287db4-zone-scraping_browser2:oe7yaonn04qa')
 stores = []
+last_store = ''
 with open('./abstracted_links.txt', 'r') as file:
     for store in file:
         store = store.rstrip('\n')
@@ -18,6 +19,7 @@ with open('./abstracted_links.txt', 'r') as file:
 
 
 def scrape(store):
+    global last_store
     if AUTH == 'USER:PASS':
         raise Exception('Provide Scraping Browsers credentials in AUTH ' +
                         'environment variable or update the script.')
@@ -29,27 +31,15 @@ def scrape(store):
         print(f'Connected! Navigating to {store}...')
         status = 'solve_failed'
         while status == 'solve_failed':
-            try:
-                print(f'Connected! Navigating to {store}...')
-                driver.get(store)
-                print('Navigated! Waiting captcha to detect and solve...')
-                result = driver.execute('executeCdpCommand', {
-                    'cmd': 'Captcha.waitForSolve',
-                    'params': {'detectTimeout': 10 * 1000},
-                })
-                status = result['value']['status']
-                print(f'Captcha status: {status}')
-            except WebDriverException:
-                print("server error, trying again")
-                driver.implicitly_wait(10)
-                driver.get(store)
-                print('Navigated! Waiting captcha to detect and solve...')
-                result = driver.execute('executeCdpCommand', {
-                    'cmd': 'Captcha.waitForSolve',
-                    'params': {'detectTimeout': 10 * 1000},
-                })
-                status = result['value']['status']
-                print(f'Captcha status: {status}')
+            print(f'Connected! Navigating to {store}...')
+            driver.get(store)
+            print('Navigated! Waiting captcha to detect and solve...')
+            result = driver.execute('executeCdpCommand', {
+                'cmd': 'Captcha.waitForSolve',
+                'params': {'detectTimeout': 10 * 1000},
+            })
+            status = result['value']['status']
+            print(f'Captcha status: {status}')
         while True:
             print('pulling review information')
             driver.implicitly_wait(3)
@@ -65,6 +55,10 @@ def scrape(store):
             review_ratings = soup.find_all('div', class_='y-css-dnttlc')
             review_dates = soup.find_all('span', class_="y-css-1d8mpv1")
             reviews = soup.find_all('p', class_=re.compile('comment__'))
+
+            last_store = store
+
+            print(f'writing to current store {last_store}')
             with open('review_info.csv', mode='a') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter='~', quoting=csv.QUOTE_NONE, escapechar='`')
                 for rating, date, review in zip(review_ratings, review_dates, reviews):
@@ -73,6 +67,7 @@ def scrape(store):
                     date = date.string
                     review = re.sub('\<.*?\>', '', string)
                     csv_writer.writerow([address, rating, date, review])
+
             print('review infromation written to file')
             try:
                 print('searching for "next" page')
@@ -81,39 +76,43 @@ def scrape(store):
                 print("No Such Element or End of Review list")
                 break
 
-            next_button = next_button.get_attribute("href")
+            store = next_button.get_attribute("href")
+
+            last_store = store
+
             print(f'Navigating to {next_button}...')
-            try:
-                status = 'solve_failed'
-                while status == 'solve_failed':
-                    driver.get(next_button)
-                    print('Navigated! Waiting captcha to detect and solve...')
-                    result = driver.execute('executeCdpCommand', {
-                        'cmd': 'Captcha.waitForSolve',
-                        'params': {'detectTimeout': 10 * 1000},
-                    })
-                    status = result['value']['status']
-                    print(f'Captcha status: {status}')
-            except WebDriverException:
-                print("server error, trying again")
-                driver.implicitly_wait(10)
-                status = 'solve_failed'
-                while status == 'solve_failed':
-                    driver.get(next_button)
-                    print('Navigated! Waiting captcha to detect and solve...')
-                    result = driver.execute('executeCdpCommand', {
-                        'cmd': 'Captcha.waitForSolve',
-                        'params': {'detectTimeout': 10 * 1000},
-                    })
-                    status = result['value']['status']
-                    print(f'Captcha status: {status}')
+            status = 'solve_failed'
+            while status == 'solve_failed':
+                driver.get(store)
+                print('Navigated! Waiting captcha to detect and solve...')
+                result = driver.execute('executeCdpCommand', {
+                    'cmd': 'Captcha.waitForSolve',
+                    'params': {'detectTimeout': 10 * 1000},
+                })
+                status = result['value']['status']
+                print(f'Captcha status: {status}')
     finally:
         driver.quit()
 
+def exception_loop(number):
+    global stores
+    global last_store
+    stores = stores[int(number):]
+    print(len(stores))
+    last_store = stores[0]
+    print(f"record: {last_store}")
+    try:
+        for i, store in enumerate(stores):
+            number = i
+            scrape(store)
+    except WebDriverException:
+        print(f"server failed, restarting from: {last_store}")
+        scrape(last_store)
+        print("restarting exception loop")
+        exception_loop(number+1)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         sys.exit()
     scrape(sys.argv[1])
-    for store in stores[int(sys.argv[2]):]:
-        scrape(store)
+    exception_loop(sys.argv[2])
