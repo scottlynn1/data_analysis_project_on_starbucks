@@ -80,7 +80,7 @@ def scrape(store):
 
             last_store = store
 
-            print(f'Navigating to {next_button}...')
+            print(f'Navigating to {last_store}...')
             status = 'solve_failed'
             while status == 'solve_failed':
                 driver.get(store)
