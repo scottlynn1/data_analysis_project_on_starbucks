@@ -3,6 +3,8 @@ from os import environ
 from selenium.webdriver import Remote, ChromeOptions as Options
 from selenium.webdriver.chromium.remote_connection import ChromiumRemoteConnection as Connection
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 from bs4 import BeautifulSoup
 import re
@@ -42,7 +44,7 @@ def scrape(store):
             print(f'Captcha status: {status}')
         while True:
             print('pulling review information')
-            driver.implicitly_wait(3)
+            driver.implicitly_wait(10)
             try:
                 content = driver.find_element(By.ID, 'main-content').get_attribute('innerHTML')
             except NoSuchElementException:
@@ -55,10 +57,9 @@ def scrape(store):
             review_ratings = soup.find_all('div', class_='y-css-dnttlc')
             review_dates = soup.find_all('span', class_="y-css-1d8mpv1")
             reviews = soup.find_all('p', class_=re.compile('comment__'))
-
             last_store = store
 
-            print(f'writing to current store {last_store}')
+            print(f'writing from current store {last_store}')
             with open('review_info.csv', mode='a') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter='~', quoting=csv.QUOTE_NONE, escapechar='`')
                 for rating, date, review in zip(review_ratings, review_dates, reviews):
@@ -67,23 +68,24 @@ def scrape(store):
                     date = date.string
                     review = re.sub('\<.*?\>', '', string)
                     csv_writer.writerow([address, rating, date, review])
-
-            print('review infromation written to file')
+            print(f'review infromation written to file from store {last_store}')
             try:
                 print('searching for "next" page')
                 next_button = driver.find_element(By.CLASS_NAME, 'next-link')
+                store = next_button.get_attribute("href")
+                driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
+                driver.implicitly_wait(3)
+                next_button.click()
             except NoSuchElementException:
                 print("No Such Element or End of Review list")
                 break
-
+            '''
             store = next_button.get_attribute("href")
-
             last_store = store
-
-            print(f'Navigating to {last_store}...')
+            '''
+            #print(f'Navigating to {last_store}...')
             status = 'solve_failed'
             while status == 'solve_failed':
-                driver.get(store)
                 print('Navigated! Waiting captcha to detect and solve...')
                 result = driver.execute('executeCdpCommand', {
                     'cmd': 'Captcha.waitForSolve',
@@ -91,6 +93,7 @@ def scrape(store):
                 })
                 status = result['value']['status']
                 print(f'Captcha status: {status}')
+            
     finally:
         driver.quit()
 
