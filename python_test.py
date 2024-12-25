@@ -19,5 +19,7 @@ for i, store in enumerate(stores):
 
 
 
-#https://www.yelp.com/biz/starbucks-columbus-94?osq=starbucks
-#1459
+#https://www.yelp.com/biz/starbucks-atlanta-120?osq=starbucks&start=10
+#1958
+
+#line 54892

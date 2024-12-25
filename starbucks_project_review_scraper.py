@@ -32,7 +32,7 @@ def scrape(store):
     try:
         print(f'Connected! Navigating to {store}...')
         status = 'solve_failed'
-        while status == 'solve_failed':
+        while (status == 'solve_failed' or status == 'invalid'):
             print(f'Connected! Navigating to {store}...')
             driver.get(store)
             print('Navigated! Waiting captcha to detect and solve...')
@@ -85,7 +85,7 @@ def scrape(store):
             '''
             #print(f'Navigating to {last_store}...')
             status = 'solve_failed'
-            while status == 'solve_failed':
+            while (status == 'solve_failed' or status == 'invalid'):
                 print('Navigated! Waiting captcha to detect and solve...')
                 result = driver.execute('executeCdpCommand', {
                     'cmd': 'Captcha.waitForSolve',
