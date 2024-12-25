@@ -14,7 +14,7 @@ import sys
 AUTH = environ.get('AUTH', default='brd-customer-hl_3e287db4-zone-scraping_browser2:oe7yaonn04qa')
 stores = []
 last_store = ''
-with open('./abstracted_links.txt', 'r') as file:
+with open('./abstracted_links_2.txt', 'r') as file:
     for store in file:
         store = store.rstrip('\n')
         stores.append(f'https://www.yelp.com{store}')

@@ -8,9 +8,9 @@ CT,Hartford 26
 DE,Dover 94
 HI,Honolulu 3264
 FL,Tallahassee 362
-GA,Atlanta 0?
+GA,Atlanta
 ID,Boise 399
-IL,Springfield 152
+IL,Springfield 152 *
 IN,Indianapolis 2409
 IA,Des Moines 228
 KS,Topeka 80
@@ -26,7 +26,7 @@ MO,Jefferson City 71
 MT,Helena 40
 NE,Lincoln 103
 NV,Carson City 458
-NH,Concord 0?
+NH,Concord 0
 NJ,Trenton 125
 NM,Santa Fe 236
 NC,Raleigh 1984
@@ -38,7 +38,7 @@ OR,Salem 300
 PA,Harrisburg 234
 RI,Providence 378
 SC,Columbia 766
-SD,Pierre 0?
+SD,Pierre 0 
 TN,Nashville 1908
 TX,Austin 4690
 UT,Salt Lake City 1112
