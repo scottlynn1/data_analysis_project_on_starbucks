@@ -9,7 +9,7 @@ import csv
 
 capitals_list = []
 AUTH = environ.get('AUTH', default='brd-customer-hl_3e287db4-zone-scraping_browser2:oe7yaonn04qa')
-with open('./state_and_capitals_2.txt', 'r') as file:
+with open('./state_and_capitals.txt', 'r') as file:
         for line in file:
             capitals_list.append(line)
 
@@ -37,7 +37,7 @@ def scrape(url):
         while True:
             print('finding link elements')
             links = driver.find_elements(By.NAME, 'Starbucks')
-            with open('links_2.txt', 'a') as file:
+            with open('links.txt', 'a') as file:
                 for link in links:
                     file.write("%s\n" % link.get_attribute("outerHTML"))
             print('link elements written to file')

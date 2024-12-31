@@ -1,48 +1,48 @@
-AL,Montgomery 325
-AK,Juneau 0?
-AZ,Phoenix 8924
-AR,Little Rock 304
-CA,Sacramento 10222
-CO,Denver 5030
-CT,Hartford 26
-DE,Dover 94
-HI,Honolulu 3264
-FL,Tallahassee 362
+AL,Montgomery
+AK,Juneau
+AZ,Phoenix
+AR,Little Rock
+CA,Sacramento
+CO,Denver
+CT,Hartford
+DE,Dover
+HI,Honolulu
+FL,Tallahassee
 GA,Atlanta
-ID,Boise 399
-IL,Springfield 152 *
-IN,Indianapolis 2409
-IA,Des Moines 228
-KS,Topeka 80
-KY,Frankfort 97
-LA,Baton Rouge 434
-ME,Augusta 48
-MD,Annapolis 709
-MA,Boston 3355
-MI,Lansing 92
-MN,St. Paul 1675
-MS,Jackson 238
-MO,Jefferson City 71
-MT,Helena 40
-NE,Lincoln 103
-NV,Carson City 458
-NH,Concord 0
-NJ,Trenton 125
-NM,Santa Fe 236
-NC,Raleigh 1984
-ND,Bismarck 61
-NY,Albany 377
-OH,Columbus 2082
-OK,Oklahoma City 1197
-OR,Salem 300
-PA,Harrisburg 234
-RI,Providence 378
-SC,Columbia 766
-SD,Pierre 0 
-TN,Nashville 1908
-TX,Austin 4690
-UT,Salt Lake City 1112
-VT,Montpelier 9~
+ID,Boise
+IL,Springfield
+IN,Indianapolis
+IA,Des Moines
+KS,Topeka
+KY,Frankfort
+LA,Baton Rouge
+ME,Augusta
+MD,Annapolis
+MA,Boston
+MI,Lansing
+MN,St. Paul
+MS,Jackson
+MO,Jefferson City
+MT,Helena
+NE,Lincoln
+NV,Carson City
+NH,Concord
+NJ,Trenton
+NM,Santa Fe
+NC,Raleigh
+ND,Bismarck
+NY,Albany
+OH,Columbus
+OK,Oklahoma City
+OR,Salem
+PA,Harrisburg
+RI,Providence
+SC,Columbia
+SD,Pierre
+TN,Nashville
+TX,Austin
+UT,Salt Lake City
+VT,Montpelier
 VA,Richmond
 WA,Olympia
 WV,Charleston

@@ -115,7 +115,7 @@ def exception_loop(number):
         exception_loop(number+1)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        sys.exit()
-    scrape(sys.argv[1])
-    exception_loop(sys.argv[2])
+  if len(sys.argv) < 3:
+      sys.exit()
+  scrape(sys.argv[1])
+  exception_loop(sys.argv[2])
