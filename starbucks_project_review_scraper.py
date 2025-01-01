@@ -4,17 +4,15 @@ from selenium.webdriver import Remote, ChromeOptions as Options
 from selenium.webdriver.chromium.remote_connection import ChromiumRemoteConnection as Connection
 from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
-
-
 from bs4 import BeautifulSoup
 import re
 import csv
 import sys
 
-AUTH = environ.get('AUTH', default='brd-customer-hl_3e287db4-zone-scraping_browser2:oe7yaonn04qa')
+AUTH = environ.get('AUTH', default='API_key')
 stores = []
 last_store = ''
-with open('./abstracted_links_2.txt', 'r') as file:
+with open('./abstracted_links.txt', 'r') as file:
     for store in file:
         store = store.rstrip('\n')
         stores.append(f'https://www.yelp.com{store}')
