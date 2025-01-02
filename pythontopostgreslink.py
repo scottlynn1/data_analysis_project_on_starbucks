@@ -1,6 +1,13 @@
 import psycopg2
 from psycopg2 import sql
 import csv
+import nltk
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.probability import FreqDist
 
 conn = psycopg2.connect(database = "starbucksproject", 
                         user = "scott", 
@@ -10,10 +17,24 @@ conn = psycopg2.connect(database = "starbucksproject",
 
 cur = conn.cursor()
 try:
-  cur.execute("SELECT COUNT(rating) FROM reviews WHERE address = 'WY';")
+  cur.execute("SELECT review FROM reviews WHERE rating = '1';")
+  text = ''
   for row in cur:
-    print(row)
+    text = text + ' ' + row[0]
+  tokens = word_tokenize(text.lower())
+  filtered_tokens = [token for token in tokens if token not in stopwords.words('english') and token.isalpha()]
+  lemmatizer = WordNetLemmatizer()
+  lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
+  finder = nltk.collocations.TrigramCollocationFinder.from_words(lemmatized_tokens)
+  print(finder.ngram_fd.most_common(100))
+  print(nltk.Text(tokens).concordance("white chocolate mocha", lines = 5))
+#  processed_text = ' '.join(lemmatized_tokens)
+
+#  fq=FreqDist(token for token in lemmatized_tokens)
+#  print(fq.most_common(20)) 
+
+    
 finally:
   cur.close()
   conn.close()
-print("success")
+print("\nsuccess")
