@@ -17,17 +17,18 @@ conn = psycopg2.connect(database = "starbucksproject",
 
 cur = conn.cursor()
 try:
-  cur.execute("SELECT review FROM reviews WHERE rating = '1';")
+  cur.execute("SELECT review FROM reviews WHERE address = 'FL' and rating = '5';")
   text = ''
   for row in cur:
     text = text + ' ' + row[0]
+  print(text)
   tokens = word_tokenize(text.lower())
   filtered_tokens = [token for token in tokens if token not in stopwords.words('english') and token.isalpha()]
   lemmatizer = WordNetLemmatizer()
   lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
   finder = nltk.collocations.TrigramCollocationFinder.from_words(lemmatized_tokens)
   print(finder.ngram_fd.most_common(100))
-  print(nltk.Text(tokens).concordance("white chocolate mocha", lines = 5))
+#  print(nltk.Text(tokens).concordance("white chocolate mocha", lines = 5))
 #  processed_text = ' '.join(lemmatized_tokens)
 
 #  fq=FreqDist(token for token in lemmatized_tokens)

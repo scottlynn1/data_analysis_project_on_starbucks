@@ -9,7 +9,7 @@ import re
 import csv
 import sys
 
-AUTH = environ.get('AUTH', default='API_key')
+AUTH = environ.get('AUTH', default='USER:PASS')
 stores = []
 last_store = ''
 with open('./abstracted_links.txt', 'r') as file:
