@@ -1,11 +1,10 @@
-# Analysis 
-This project is a part of the [Data Science Working Group](http://datascience.codeforsanfrancisco.org) at [Code for San Francisco](http://www.codeforsanfrancisco.org).  Other DSWG projects can be found at the [main GitHub repo](https://github.com/sfbrigade/data-science-wg).
-
-#### -- Project Status: [Active, On-Hold, Completed]
+# Analysis of Starbucks 
 
 ## Project Intro/Objective
-The purpose of this project is to explore possible driving factors as to the recent decline in the revenue growth of the international coffee chain Starbucks.
+The purpose of this project is to explore possible driving factors of the recent decline in the revenue growth of the international coffee chain Starbucks.
 
+## Project Description
+This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations ,if any, between costumer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
 ### Methods Used
 * scraping yelp reviews of Starbucks stores accross the United State of America
 * uploading and organizing reviews into a Postgresql database
