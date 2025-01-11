@@ -18,6 +18,8 @@ This project obtains a real world data set through scraping tens of thousands of
 * Postgresql database
 * PowerBI
 
-## Project Description
+## Executive Summary
+
 
 ## Getting Started
+<img src="images/RelativeIncrease.png" alt="relative increase chart" width='38%' heigth='auto'>
