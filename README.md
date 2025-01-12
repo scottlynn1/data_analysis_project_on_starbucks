@@ -32,9 +32,10 @@ All of this data was imported into Power BI for visualization and further explor
 Review ratings show a downward trend across time with an average review rating trending from around 3.36 stars to 2.85 stars.
 <img src="images/RatingsTrend.png" alt="ratings chart" width='48%' heigth='auto'>
 An area of interest is the period of decline around 2015 and so analysis of reviews is focused on comparing content of reviews before and after this period of decline to attempt to uncover what driving factors might be the cause of this decline.
-
-Natural language processing between negative and positive reviews
-
+Reviews were filtered based on contexts of bad reviews (1 star reviews) and good reviews (5 star reviews) as well as reviews before 2016 and after 2016.
+After concatenating and preprocessing reviews before using natural language processing with pythons nltk library, a list of ngrams (consecutive word groups of n words long) were extracted into a list of 100 most frequent ngrams.
+Trigrams (ngrams of 3 words long) were found to reveal the most information as well as uncover product level information because many starbucks drink names are exactly 3 words in length.
+Many similar trigrams, such as "made drink wrong" and "got order wrong", were placed into a sinlge category and after discarding trigrams that didnt offer useful information it was found that 4 main categories dominated in all filter contexts.
 <img src="images/PercentageofMentions.png" alt="ratings chart" width='48%' heigth='auto'>
 
 
