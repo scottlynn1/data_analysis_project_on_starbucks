@@ -40,4 +40,8 @@ Many similar trigrams, such as "made drink wrong" and "got order wrong", were pl
 From this graph, one could posit that customer service being the most dominant issue is where the company needs to focus its resources. It's hard to disagree that quality of customer is central to any client facing operation but the goal in this analysis is to uncover any trends across time that may correlate with declines in financial performance.
 Comparing the relative increase in frequency in which each category shows up in reviews before and after 2016 tells different and more accurate story.
 <img src="images/RelativeIncrease.png" alt="relative increase chart" width='38%' heigth='auto'>
-From this graph we can see that
+From this graph we can see that wait times saw the largest increase in negative reviews before and after 2016 followed by order correctness, drive-through, and then lastly costumer service.
+This indicates that increased wait times is the largest driver in decline in average review ratings and therefore the area in which starbucks should consider focusing on improving.
+Further natural language processing on each individual category with pythons transformers library which enables the use of pretrained machine learning models to summerize text helps to corroborate this statement.
+For instance, summerizing blocks of concatenated negative reviews that mention the drive through show that the top issue customers encountered with it were that of long wait times followed by that of incorrect orders.
+The same results were found with a category that only shows up from 2019 and onward, a new mobile ordering system, that consistatnly was related with long wait times and incorrect orders.
