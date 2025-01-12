@@ -1,7 +1,10 @@
 # Analysis of Starbucks 
 
 ## Project Intro/Objective
-The purpose of this project is to explore possible driving factors of the recent decline in the revenue growth of the international coffee chain Starbucks.
+<div>The purpose of this project is to explore possible driving factors of the recent decline in the revenue growth of the international coffee chain Starbucks.
+Starbucks revenue for the quarter ending September 30, 2024 was $9.074B, a 3.2% decline year-over-year.<div/>
+<img src="images/starbucksimage.png" alt="ratings chart" width='100%' heigth='auto'>
+<div>The recent decline in performance is such a concern that guidance for 2025 has been suspended </div>
 
 ## Project Description
 This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations ,if any, between costumer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
@@ -27,7 +30,12 @@ All of this data was imported into Power BI for visualization and further explor
 
 ## Analysis Deep-dive
 Review ratings show a downward trend across time with an average review rating trending from around 3.36 stars to 2.85 stars.
-<img src="images/RatingsTrend.png" alt="ratings chart" width='48%' heigth='auto'><span>An area of interest is the period of decline around 2015 and so analysis of reviews is focused on comparing content of reviews before and after this period of decline to reveal any driving factors.<span/>
+<img src="images/RatingsTrend.png" alt="ratings chart" width='48%' heigth='auto'>
+An area of interest is the period of decline around 2015 and so analysis of reviews is focused on comparing content of reviews before and after this period of decline to attempt to uncover what driving factors might be the cause of this decline.
+
+Natural language processing between negative and positive reviews
+
+<img src="images/PercentageofMentions.png" alt="ratings chart" width='48%' heigth='auto'>
 
 
 
