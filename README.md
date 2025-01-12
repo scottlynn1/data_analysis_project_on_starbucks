@@ -37,8 +37,7 @@ After concatenating and preprocessing reviews before using natural language proc
 Trigrams (ngrams of 3 words long) were found to reveal the most information as well as uncover product level information because many starbucks drink names are exactly 3 words in length.
 Many similar trigrams, such as "made drink wrong" and "got order wrong", were placed into a sinlge category and after discarding trigrams that didnt offer useful information it was found that 4 main categories dominated in all filter contexts.
 <img src="images/PercentageofMentions.png" alt="ratings chart" width='48%' heigth='auto'>
-
-
-
+From this graph, one could posit that customer service being the most dominant issue is where the company needs to focus its resources. It's hard to disagree that quality of customer is central to any client facing operation but the goal in this analysis is to uncover any trends across time that may correlate with declines in financial performance.
+Comparing the relative increase in frequency in which each category shows up in reviews before and after 2016 tells different and more accurate story.
 <img src="images/RelativeIncrease.png" alt="relative increase chart" width='38%' heigth='auto'>
-
+From this graph we can see that
