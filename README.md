@@ -30,7 +30,7 @@ All of this data was imported into Power BI for visualization and further explor
 
 ## Analysis Deep-dive
 Review ratings show a downward trend across time with an average review rating trending from around 3.36 stars to 2.85 stars.
-<img src="images/RatingsTrend.png" alt="ratings chart" width='48%' heigth='auto'>
+<img src="images/RatingsTrend.png" alt="ratings chart" width='78%' heigth='auto'>
 An area of interest is the period of decline around 2015 and so analysis of reviews is focused on comparing content of reviews before and after this period of decline to attempt to uncover what driving factors might be the cause of this decline.
 Reviews were filtered based on contexts of bad reviews (1 star reviews) and good reviews (5 star reviews) as well as reviews before 2016 and after 2016.
 After concatenating and preprocessing reviews before using natural language processing with pythons nltk library, a list of ngrams (consecutive word groups of n words long) were extracted into a list of 100 most frequent ngrams.
