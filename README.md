@@ -12,12 +12,12 @@ Further analyis is underway to uncover any differences between stores in our top
 
 ### Methods Used
 Over 72,000 reviews were scraped in several steps from Yelp using a costum built scraper built with the selenium and beautifulsoup libraries in python.
-The stores are mainly located within each states capital but additional cites were used if review counts in some states where too low in order to gain a more accurate picture.
+The stores are mainly located within each states capital but additional cities were used if review counts in some states where too low in order to gain a more accurate picture.
 Included with each review data point is the rating, the state that it is from, and the date of the review.
-* uploading and organizing reviews into a Postgresql database
-* analysis of trends across states and time to explore correlation of costumer satisfaction with trends in financial performance
-* natural language processing to reveal any dominant themes in positive and negative reviews
-* use powerbi to visualize data and carry out further exploratory analysis
+This data was then loaded into a Postgresql database for storage and light exploratory analysis.
+Natural language processing with the nltk (natural language toolkit) python library was used to explore review content and frequency of topics and themes. The reviews were concatenated, cleaned and preprocessed before analysis with the natural language toolkit on several filter contexts. The most useful information which was loaded into the database and used for further analysis was the frequency of trigrams, groups of three consecutive written words. These trigrams were further grouped into a few overarching categories based on similarity.
+Using pretrained machine learning models with pythons transformers library, reviews of each category were concatenated and summarized to uncover high level overviews of what specific issues customers experienced with each category.
+All of this data was imported into Power BI for visualization and further exploratory analysis.
 
 ### Technologies
 * Python
