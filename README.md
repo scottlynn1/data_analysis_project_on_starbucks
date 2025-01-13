@@ -25,6 +25,7 @@ Over 72,000 reviews were scraped in several steps from Yelp using a custom built
 The stores are mainly located within each state's capital but additional cities were used if review counts in some states were too low in order to gain a more accurate picture.
 Included with each review data point is the rating of the review, the state that it is from, and the date of the review.
 This data was then loaded into a Postgresql database for storage and light exploratory analysis.
+
 Natural language processing with the nltk (natural language toolkit) python library (reviewProcessor/postgreslink.py) was used to explore review content and frequency of topics and themes. The reviews were concatenated, cleaned and preprocessed before analysis with the natural language toolkit on several filter contexts. The most useful information which was loaded into the database and used for further analysis was the frequency of trigrams, groups of three consecutive written words. These trigrams were further grouped into a few overarching categories based on similarity.
 Using pre-trained machine learning models with pythons transformers library (reviewProcessor/summarizer.py), reviews of each category were concatenated and summarized to uncover high level overviews of what specific issues customers experienced with each category.
 All of this data was imported into Power BI for visualization and further exploratory analysis.
@@ -58,14 +59,18 @@ Comparing the relative increase in frequency in which each category shows up in 
 
 From this graph we can see that wait times saw the largest increase in negative reviews before and after 2016 followed by order correctness, drive-through, and then lastly customer service.
 This indicates that increased wait times is the largest driver of decline in average review ratings and therefore the area in which Starbucks should consider focusing on improving.
+
 Further natural language processing on each individual category with python's transformers library which enables the use of pre-trained machine learning models to summarize text helps to corroborate this statement.
 For instance, summarizing blocks of concatenated negative reviews into summarizer.py that mention the drive through, and then recursively concatenating summaries to input into summarizy.py show that the underlying issues customers encountered were that of long wait times followed by that of incorrect orders.
 The same results were found with a category that only shows up from 2019 and onward, a new mobile ordering system that consistently was linked with long wait times and incorrect orders.
 
+## Recommendations
 Therefore, we believe that in focusing attention in two main areas, improving wait times and reducing the amount of incorrect orders, we will see the greatest improvement in customer satisfaction.
 For improving wait times we suggest further analysis with staffing, scheduling and business activity data to see in what regions and at what times we need to increase staff to meet customer demand.
 For reducing the amount of incorrect orders we suggest simplifying the menu to allow for a more streamline environment, while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders.
+
 Furthermore, in our view, taking both of these measures is likely to positively influence each other. Increasing staffing is likely to lead to employees not being overwhelmed and more care taken in fulfilling orders correctly. Simplifying the menu is likely to lead to a more streamlined operation and reduce wait times.
+
 Additionally, solely focusing on customer service through staff training for example, may only cause frustration for both staff and customers alike, if root causes of customer satisfaction are other issues.
 
 ## Findings worth further analysis
