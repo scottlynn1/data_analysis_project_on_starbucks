@@ -52,12 +52,14 @@ Comparing the relative increase in frequency in which each category shows up in 
 From this graph we can see that wait times saw the largest increase in negative reviews before and after 2016 followed by order correctness, drive-through, and then lastly customer service.
 This indicates that increased wait times is the largest driver of decline in average review ratings and therefore the area in which Starbucks should consider focusing on improving.
 Further natural language processing on each individual category with python's transformers library which enables the use of pre-trained machine learning models to summarize text helps to corroborate this statement.
-For instance, summarizing blocks of concatenated negative reviews that mention the drive through show that the underlying issues customers encountered were that of long wait times followed by that of incorrect orders.
+For instance, summarizing blocks of concatenated negative reviews into summarizer.py that mention the drive through, and then recursively concatenating summaries to input into summarizy.py show that the underlying issues customers encountered were that of long wait times followed by that of incorrect orders.
 The same results were found with a category that only shows up from 2019 and onward, a new mobile ordering system that consistently was linked with long wait times and incorrect orders.
 
 Therefore, we believe that in focusing attention in two main areas, improving wait times and reducing the amount of incorrect orders, we will see the greatest improvement in customer satisfaction.
 For improving wait times we suggest further analysis with staffing, scheduling and business activity data to see in what regions and at what times we need to increase staff to meet customer demand.
 For reducing the amount of incorrect orders we suggest simplifying the menu to allow for a more streamline environment, while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders.
+Furthermore, in our view, taking both of these measures is likely to positively influence each other. Increasing staffing is likely to lead to employees not being overwhelmed and more care taken in fulfilling orders correctly. Simplifying the menu is likely to lead to a more streamlined operation and reduce wait times.
+Additionally, solely focusing on customer service through staff training for example, may only cause frustration for both staff and customers alike, if root causes of customer satisfaction are other issues.
 
 ## Findings worth further analysis
 From this data, further product level analysis could be carried for certain drinks that show up in the trigrams list. For instance, the nitro cold brew is a trigram that appears a lot in positive reviews, and the white chocolate macchiato is a trigram that appears a lot in negative reviews. If we choose to simplify the menu, then product level analysis of review data combined with sales data may reveal further analysis as to what specific changes should be made as well as overall direction.
@@ -67,3 +69,7 @@ It is worth noting that average review rating varied across different states.
 <img src="images/TopStates.png" alt="relative increase chart" width='38%' heigth='auto'><img src="images/BottomStates.png" alt="relative increase chart" width='38%' heigth='auto'>
 
 Comparing data and collecting additional data from stores that show the highest level of customer satisfaction (Pennsylvania and Maryland) to stores that show the lowest level of customer satisfaction (New Mexico, Mississippi, West Virginia, and New Hampshire) may lead to beneficial insights as to any store or regional differences that lead to positive or negative customer experiences.
+
+## Weaknesses of analysis
+There is a large variance in total reviews collected between states and thus more reviews still need to be collected from states with few reviews in order to gain a better resolution of state by state performance.
+Also, depending on the technique and methods of natural language processing, the analysis of reviews in this way can lead to qualitative data and care should be taken when reaching conclusions. For instance, the use of trigrams in revealing common customer complaints may miss more nuanced complaints that can't easily be expressed in such few words.
