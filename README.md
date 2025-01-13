@@ -4,7 +4,7 @@
 <div>The purpose of this project is to explore possible driving factors of the recent decline in the revenue growth of the international coffee chain Starbucks.
 Starbucks revenue for the quarter ending September 30, 2024 was $9.074B, a 3.2% decline year-over-year.<div/>
 <img src="images/starbucksimage.png" alt="ratings chart" width='100%' heigth='auto'>
-<div>The recent decline in performance is such a concern that guidance for 2025 has been suspended </div>
+<div>The recent decline in Starbucks performance is such a concern that guidance for 2025 has been suspended and a need, as stated by the new CEO, to take steps in shifting its business strategy in a new direction.</div>
 
 ## Project Description
 This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations ,if any, between customer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
@@ -14,12 +14,12 @@ Customer satisfaction with Starbucks stores throughout the U.S. averages 2.95 st
 Further analysis is underway to uncover any differences between stores in our top performing states, Pennsylvania and Maryland, and our bottom performing states, New Mexico, Mississippi, West Virginia, and New Hampshire.
 
 ### Methods Used
-Over 72,000 reviews were scraped in several steps from Yelp using a custom built scraper built with the selenium and beautifulsoup libraries in python.
+Over 72,000 reviews were scraped in several steps from Yelp using a custom built scraper (scraper/starbucks_review_scraper.py) built with the selenium and beautifulsoup libraries in python.
 The stores are mainly located within each state's capital but additional cities were used if review counts in some states were too low in order to gain a more accurate picture.
-Included with each review data point is the rating, the state that it is from, and the date of the review.
+Included with each review data point is the rating of the review, the state that it is from, and the date of the review.
 This data was then loaded into a Postgresql database for storage and light exploratory analysis.
-Natural language processing with the nltk (natural language toolkit) python library was used to explore review content and frequency of topics and themes. The reviews were concatenated, cleaned and preprocessed before analysis with the natural language toolkit on several filter contexts. The most useful information which was loaded into the database and used for further analysis was the frequency of trigrams, groups of three consecutive written words. These trigrams were further grouped into a few overarching categories based on similarity.
-Using pre-trained machine learning models with pythons transformers library, reviews of each category were concatenated and summarized to uncover high level overviews of what specific issues customers experienced with each category.
+Natural language processing with the nltk (natural language toolkit) python library (reviewProcessor/postgreslink.py) was used to explore review content and frequency of topics and themes. The reviews were concatenated, cleaned and preprocessed before analysis with the natural language toolkit on several filter contexts. The most useful information which was loaded into the database and used for further analysis was the frequency of trigrams, groups of three consecutive written words. These trigrams were further grouped into a few overarching categories based on similarity.
+Using pre-trained machine learning models with pythons transformers library (reviewProcessor/summarizer.py), reviews of each category were concatenated and summarized to uncover high level overviews of what specific issues customers experienced with each category.
 All of this data was imported into Power BI for visualization and further exploratory analysis.
 
 ### Technologies
