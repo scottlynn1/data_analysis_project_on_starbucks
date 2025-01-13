@@ -60,3 +60,10 @@ For improving wait times we suggest further analysis with staffing, scheduling a
 For reducing the amount of incorrect orders we suggest simplifying the menu to allow for a more streamline environment, while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders.
 
 ## Finding worth further analysis
+From this data, further product level analysis could be carried for certain drinks that show up in the trigrams list. For instance, the nitro cold brew is a trigram that appears a lot in positive reviews, and the white chocolate mocchiato is a trigram that appears a lot in negative reviews. If we choose to simplify the menu then product level analysis with review data combined with sales data may reveal further analysis as to what changes should be made.
+
+It is worth noting that average review rating varied across different states.
+
+<img src="images/TopStates.png" alt="relative increase chart" width='38%' heigth='auto'><img src="images/BottomStates.png" alt="relative increase chart" width='38%' heigth='auto'>
+
+Comparing data and collecting additional data from stores that show the highest level of customer satisfaction (Pennsylvania and Maryland) to stores that show the lowest level of customer satisfaction (New Mexico, Mississippi, West Virginia, and New Hampshire) may lead to beneficial insights as to any store or regional differences that lead to positive or negative customer experiences.
