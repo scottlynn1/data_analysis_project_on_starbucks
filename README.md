@@ -11,7 +11,7 @@ This project obtains a real world data set through scraping tens of thousands of
 
 ## Executive Summary
 Customer satisfaction with Starbucks stores throughout the U.S. averages 2.95 stars out of 5. Reviews have trended downward across time from an average of 3.36 stars between 2010 and 2014 to an average of 2.85 stars between 2000 and 2024 with the sharpest decrease between the years 2015 and 2016. Natural language processing of reviews before and after this period of decrease in average review ratings show that wait times and incorrect orders are issues that show the highest increase in prevalence in negative reviews, 116% more for wait times and 95% more for incorrect orders. Other issues that show a considerable increase are issues with the drive-thru and the new, as of 2019, mobile ordering system.
-However, further natural language processing reveals that these issues can be considered as subcategories that can be placed under issues of wait times and incorrect orders.
+However, further natural language processing reveals that these issues can be considered as subcategories of wait times and incorrect orders.
 
 We suggest that wait times are decreased by providing adequate staff during peak hours and better prioritizing orders between in-store, drive-through, and mobile orders. 
 We also suggest simplifying the menu in order to reduce the frequency of incorrect orders while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders. 
