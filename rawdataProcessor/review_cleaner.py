@@ -1,5 +1,6 @@
 import csv
-
+# This program was used to just keep the location info for the reviews to the state the store was from
+# For this project the state level was enough granularity
 file = open('./review_info_cleaned_copy.csv', mode='r')
 file2 = open('./review_info_cleaned_2.csv', mode='a')
 

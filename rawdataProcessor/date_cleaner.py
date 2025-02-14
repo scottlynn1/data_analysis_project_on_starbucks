@@ -1,5 +1,7 @@
 import csv
 
+# this program converts the date data that was abstracted to a postgresql friendly format
+
 with open('./review_info_cleaned.csv', 'r') as file, open('./review_info_cleaned_2.csv', 'w') as file2:
     csv_reader = csv.reader(file, delimiter='~')
     for row in csv_reader:

@@ -8,8 +8,10 @@ from bs4 import BeautifulSoup
 import re
 import csv
 import sys
-
+# this file scrapes a list of provided stores for every review at each store
+# inluding rating, date, city and state, and review content
 AUTH = environ.get('AUTH', default='USER:PASS')
+# initiate list and full with links to every store abstracted from starbucks_storelinks_scraper.py
 stores = []
 last_store = ''
 with open('./abstracted_links.txt', 'r') as file:
@@ -17,9 +19,10 @@ with open('./abstracted_links.txt', 'r') as file:
         store = store.rstrip('\n')
         stores.append(f'https://www.yelp.com{store}')
 
-
+# main scraper function
 def scrape(store):
     global last_store
+    # initiate connection to bright data proxy server
     if AUTH == 'USER:PASS':
         raise Exception('Provide Scraping Browsers credentials in AUTH ' +
                         'environment variable or update the script.')
@@ -27,7 +30,9 @@ def scrape(store):
     server_addr = f'https://{AUTH}@brd.superproxy.io:9515'
     connection = Connection(server_addr, 'goog', 'chrome')
     driver = Remote(connection, options=Options())
+    # connection initiated
     try:
+        # captcha solving loop
         print(f'Connected! Navigating to {store}...')
         status = 'solve_failed'
         while (status == 'solve_failed' or status == 'invalid'):
@@ -40,15 +45,20 @@ def scrape(store):
             })
             status = result['value']['status']
             print(f'Captcha status: {status}')
+        # end captcha solving loop
+        # while loop to loop through every page on current store provided as argument until next page element is not found
         while True:
             print('pulling review information')
+            # wait for page elements to load
             driver.implicitly_wait(10)
+            # try two different element tags to scrape with BeautifulSoup
             try:
                 content = driver.find_element(By.ID, 'main-content').get_attribute('innerHTML')
             except NoSuchElementException:
                 print('could not find main tag, searching parent')
                 driver.implicitly_wait(3)
                 content = driver.find_element(By.CLASS_NAME, 'y-css-13kng0r').get_attribute('innerHTML')
+            # grab each element that contains date, location, rating, and review
             soup = BeautifulSoup(content, 'html.parser')
             address = soup.find('address').find_all('span')[-1:]
             address = address[0].string
@@ -56,7 +66,7 @@ def scrape(store):
             review_dates = soup.find_all('span', class_="y-css-1d8mpv1")
             reviews = soup.find_all('p', class_=re.compile('comment__'))
             last_store = store
-
+            # write data to file
             print(f'writing from current store {last_store}')
             with open('review_info.csv', mode='a') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter='~', quoting=csv.QUOTE_NONE, escapechar='`')
@@ -67,6 +77,9 @@ def scrape(store):
                     review = re.sub('\<.*?\>', '', string)
                     csv_writer.writerow([address, rating, date, review])
             print(f'review infromation written to file from store {last_store}')
+            # close file
+            # attempt to find next page element
+            # otherwise break loop and exit function
             try:
                 print('searching for "next" page')
                 next_button = driver.find_element(By.CLASS_NAME, 'next-link')
@@ -77,11 +90,8 @@ def scrape(store):
             except NoSuchElementException:
                 print("No Such Element or End of Review list")
                 break
-            '''
-            store = next_button.get_attribute("href")
-            last_store = store
-            '''
-            #print(f'Navigating to {last_store}...')
+            # captcha solving loop
+            print(f'Navigating to {last_store}...')
             status = 'solve_failed'
             while (status == 'solve_failed' or status == 'invalid'):
                 print('Navigated! Waiting captcha to detect and solve...')
@@ -91,10 +101,15 @@ def scrape(store):
                 })
                 status = result['value']['status']
                 print(f'Captcha status: {status}')
+            # end captcha solving loop
             
     finally:
         driver.quit()
 
+# this function was defined due to several errors on bright data's side that were out of my control and would exit my program
+# this function catches a general error given by bright data and then calls itself recursively from the "last_store"
+# I did this to reduce the amount of times I had to restart the program
+# Maybe not the best fix because it may lead to other issues such as stack overflows but it allowed for less interuptions in the scraping process
 def exception_loop(number):
     global stores
     global last_store
@@ -112,6 +127,9 @@ def exception_loop(number):
         print("restarting exception loop")
         exception_loop(number+1)
 
+# the scraper would still exit so this function allows me to restart where I left off by provoding command line arguments
+#argv[1] being the line in my "abstracted_store_links" file that the last run left off on
+#argv[2] being the actual link to that store
 if __name__ == '__main__':
   if len(sys.argv) < 3:
       sys.exit()

@@ -9,6 +9,8 @@ import re
 import csv
 import sys
 
+#this scraper is still a work in progress!
+#used for deeper analysis into competition
 AUTH = environ.get('AUTH', default='USER:PASS')
 stores = []
 last_store = ''

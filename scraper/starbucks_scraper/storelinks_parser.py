@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-
+# simple program to format raw abtracted store links into a format suited to my needs
 with open('./links_2.txt', 'r') as file:
     text = file.read()
 soup = BeautifulSoup(text, 'html.parser')
