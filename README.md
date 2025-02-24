@@ -10,14 +10,14 @@ Starbucks revenue for the quarter ending September 30, 2024 was $9.074B, a 3.2% 
 This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations, if any, between customer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
 
 ## Executive Summary
-Customer satisfaction with Starbucks stores throughout the U.S. averages 2.95 stars out of 5. Reviews have trended downward across time from an average of 3.36 stars between 2010 and 2014 to an average of 2.85 stars between 2000 and 2024 with the sharpest decrease between the years 2015 and 2016. Natural language processing of reviews before and after this period of decrease in average review ratings show that wait times and incorrect orders are issues that show the highest increase in prevalence in negative reviews, 116% more for wait times and 95% more for incorrect orders. Other issues that show a considerable increase are issues with the drive-thru and the new, as of 2019, mobile ordering system.
+Customer satisfaction with Starbucks stores throughout the U.S. averages 2.95 stars out of 5. Reviews have trended downward across time from an average of 3.36 stars between 2010 and 2014 to an average of 2.85 stars between 2000 and 2024 with the sharpest decrease between the years 2015 and 2016. Natural language processing of reviews before and after this period of sharp decrease in average review ratings show that wait times and incorrect orders are issues that show the highest increase in prevalence in negative reviews, 116% more for wait times and 95% more for incorrect orders. Other issues that show a considerable increase are issues with the drive-thru and the new, as of 2019, mobile ordering system.
 However, further natural language processing reveals that these issues can be considered as subcategories of wait times and incorrect orders.
 
 We suggest that wait times are decreased by providing adequate staff during peak hours and better prioritizing orders between in-store, drive-through, and mobile orders. 
-We also suggest simplifying the menu in order to reduce the frequency of incorrect orders while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders. 
-We believe that these measures will also positively influence each other. Adequate staff will ensure that employees are not overwhelmed which may reduce the frequency of incorrect orders and a simplified menu will create a more streamlined  work environment which may reduce wait times.
+We also suggest reducing the frequency of incorrect orders by simplifying the menu while also taking into consideration not to leave out long term customers who choose starbucks for particular drink orders. 
+We believe that these measures will also positively influence each other. Adequate staff will ensure that employees are not overwhelmed which may reduce the frequency of incorrect orders and a simplified menu will create a more streamlined work environment which may reduce wait times.
 
-Further analysis is recommended on stores in our top performing states, Pennsylvania and Maryland, and our bottom performing states, New Mexico, Mississippi, West Virginia, and New Hampshire which may lead to further beneficial insights as to any store or regional differences that lead to positive or negative customer experiences and replication of successful models.
+Further analysis is recommended on stores in our top performing states, Pennsylvania and Maryland, and our bottom performing states, New Mexico, Mississippi, West Virginia, and New Hampshire which may lead to further beneficial insights as to any store level or regional differences that lead to positive or negative customer experiences.
 If a menu simplification project is to be undertaken, further analysis on prodect level data obtained from this data pipeline can be used to guide project directions.
 
 ### Methods Used
@@ -39,23 +39,23 @@ All of this data was imported into Power BI for visualization and further explor
 ## Analysis Deep-dive
 Review ratings show a downward trend across time with an average review rating trending from around 3.36 stars to 2.85 stars.
 
-<img src="images/RatingsTrend.png" alt="ratings chart" width='58%' heigth='auto'>
+<img src="images/RatingsTrend.png" alt="ratings chart" width='78%' heigth='auto'>
 
 An area of interest is the period of decline around 2015 and so analysis of reviews is focused on comparing content of reviews before and after this period of decline to attempt to uncover what driving factors might be the cause of this decline.
 Reviews were filtered based on contexts of bad reviews (1 star reviews) and good reviews (5 star reviews) as well as reviews before 2016 and after 2016.
 After concatenating and preprocessing reviews for natural language processing with python's nltk library, a list of ngrams (consecutive word groups of n words long) were extracted into a list of 100 most frequent ngrams.
 Trigrams (ngrams of 3 words long) were found to reveal the most information as well as uncover product level information because many Starbucks drink names are exactly 3 words in length.
 
-<img src="images/positivetrigrams.png" alt="relative increase chart" width='24.5%' heigth='auto'><img src="images/negativetrigrams.png" alt="relative increase chart" width='24%' heigth='auto'>
+<img src="images/positivetrigrams.png" alt="relative increase chart" width='30.5%' heigth='auto'><img src="images/negativetrigrams.png" alt="relative increase chart" width='30%' heigth='auto'>
 
 Many similar trigrams, such as "made drink wrong" and "got order wrong", were placed into a single category and after discarding trigrams that didn't offer useful information it was found that 4 main categories dominated in all filter contexts.
 
-<img src="images/PercentageofMentions.png" alt="ratings chart" width='55%' heigth='auto'>
+<img src="images/PercentageofMentions.png" alt="ratings chart" width='70%' heigth='auto'>
 
 From this graph, one could posit that customer service being the most dominant issue is where the company needs to focus its resources. It's hard to disagree that quality of customer is central to any client facing operation but the goal in this analysis is to uncover any trends across time that may correlate with declines in financial performance.
 Comparing the relative increase in frequency in which each category shows up in reviews before and after 2016 tells a different and more accurate story.
 
-<img src="images/RelativeIncrease.png" alt="relative increase chart" width='38%' heigth='auto'>
+<img src="images/RelativeIncrease.png" alt="relative increase chart" width='58%' heigth='auto'>
 
 From this graph we can see that wait times saw the largest increase in negative reviews before and after 2016 followed by order correctness, drive-through, and then lastly customer service.
 This indicates that increased wait times is the largest driver of decline in average review ratings and therefore the area in which Starbucks should consider focusing on improving.
@@ -78,7 +78,7 @@ From this data, further product level analysis could be carried for certain drin
 
 It is worth noting that average review rating varied across different states.
 
-<img src="images/TopStates.png" alt="relative increase chart" width='38%' heigth='auto'><img src="images/BottomStates.png" alt="relative increase chart" width='38%' heigth='auto'>
+<img src="images/TopStates.png" alt="relative increase chart" width='50%' heigth='auto'><img src="images/BottomStates.png" alt="relative increase chart" width='50%' heigth='auto'>
 
 Comparing data and collecting additional data from stores that show the highest level of customer satisfaction (Pennsylvania and Maryland) to stores that show the lowest level of customer satisfaction (New Mexico, Mississippi, West Virginia, and New Hampshire) may lead to beneficial insights as to any store or regional differences that lead to positive or negative customer experiences.
 
