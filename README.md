@@ -10,15 +10,28 @@ Starbucks revenue for the quarter ending September 30, 2024 was $9.074B, a 3.2% 
 This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations, if any, between customer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
 
 ## Executive Summary
-Customer satisfaction with Starbucks stores throughout the U.S. averages 2.95 stars out of 5. Reviews have trended downward across time from an average of 3.36 stars between years 2010 and 2014 to an average of 2.85 stars between years 2000 and 2024 with the sharpest decrease between the years 2015 and 2016. Natural language processing of reviews before and after this period of sharp decrease in review ratings show that wait times and incorrect orders are issues that show the highest increase in prevalence in negative reviews, 116% more for wait times and 95% more for incorrect orders. Other topics that show a considerable increase in negative reviews are the drive-thru and the new, as of 2019, mobile ordering system. However, further natural language processing reveals that these issues can be considered as subcategories of wait times and incorrect orders.
+Customer satisfaction across Starbucks locations in the United States currently averages 2.95 out of 5 stars, reflecting a notable decline over time. From 2010 to 2014, the average rating stood at 3.36 stars, but has since dropped to 2.85 stars as of 2024. The most significant year-over-year decline occurred between 2015 and 2016.
 
-Being that wait times and incorrect orders show the highest increase in mentioned issues we suggest the following based on further analysis into these specific overarching problems.
-We suggest that wait times are decreased by providing adequate staff during peak hours and better prioritizing orders between in-store, drive-through, and mobile orders.
-We also suggest reducing the frequency of incorrect orders by simplifying the menu while also taking into consideration not to leave out long term customers who choose Starbucks for particular drink orders. 
-We believe that these measures will also positively influence each other. Adequate staff will ensure that employees are not overwhelmed which may reduce the frequency of incorrect orders and a simplified menu will create a more streamlined work environment which may reduce wait times.
+Through natural language processing (NLP) of customer reviews before and after this period, two key issues have emerged as the most significant contributors to negative sentiment: wait times and incorrect orders. Mentions of long wait times increased by 116%, while references to incorrect orders rose by 95%. Additional complaints were frequently associated with the drive-thru experience and the mobile ordering system introduced in 2019—both of which, upon deeper NLP analysis, appear to be subcategories of the broader concerns around wait times and order accuracy.
 
-Further analysis is recommended on stores in our top performing states, Pennsylvania and Maryland, and our bottom performing states, New Mexico, Mississippi, West Virginia, and New Hampshire which may lead to further beneficial insights as to any store level or regional differences that lead to positive or negative customer experiences.
-If a menu simplification project is to be undertaken, further analysis on product level data obtained from this data pipeline is suggested and may help guide project direction.
+Based on these findings, we recommend the following:
+
+1. Reduce wait times by:
+
+  * Ensuring sufficient staffing during peak hours.
+
+  * Implementing more effective prioritization between in-store, drive-thru, and mobile orders.
+
+2. Improve order accuracy by:
+
+  * Simplifying the menu to reduce complexity in order preparation.
+
+  * Ensuring that any menu adjustments continue to accommodate long-term customers with specific preferences.
+
+We anticipate that these strategies will have mutually reinforcing benefits: improved staffing levels can reduce employee stress and workload, which may decrease error rates, while a streamlined menu can enhance operational efficiency and shorten wait times.
+
+Further investigation is recommended in both high-performing states (Pennsylvania and Maryland) and low-performing states (New Mexico, Mississippi, West Virginia, and New Hampshire) to uncover potential regional or store-level factors driving customer sentiment.
+If a menu simplification initiative is pursued, additional product-level analysis using this dataset is advised to inform decisions around which items to retain or remove.
 
 ### Methods Used
 Over 72,000 reviews were scraped in several steps from Yelp using a custom built scraper (scraper/starbucks_review_scraper.py) built with the selenium and beautifulsoup libraries in python.
