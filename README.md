@@ -34,14 +34,15 @@ Further investigation is recommended in both high-performing states (Pennsylvani
 If a menu simplification initiative is pursued, additional product-level analysis using this dataset is advised to inform decisions around which items to retain or remove.
 
 ### Methods Used
-Over 72,000 reviews were scraped in several steps from Yelp using a custom built scraper (scraper/starbucks_review_scraper.py) built with the selenium and beautifulsoup libraries in python.
-The stores are mainly located within each state's capital but additional cities were used if review counts in some states were too low in order to gain a more accurate picture.
-Included with each review data point is the rating of the review, the state that it is from, and the date of the review.
-This data was then loaded into a Postgresql database for storage and light exploratory analysis.
+Over 72,000 customer reviews were collected from Yelp using a custom-built web scraper (scraper/starbucks_review_scraper.py) developed in Python with the Selenium and BeautifulSoup libraries. While data collection primarily focused on Starbucks locations in each state capital, additional cities were included where necessary to ensure sufficient review volume and a more representative sample.
 
-Natural language processing with the nltk (natural language toolkit) python library (reviewProcessor/postgreslink.py) was used to explore review content and frequency of topics and themes. The reviews were concatenated, cleaned and preprocessed before analysis with the natural language toolkit on several filter contexts. The most useful information which was loaded into the database and used for further analysis was the frequency of trigrams, groups of three consecutive written words. These trigrams were further grouped into a few overarching categories based on similarity.
-Using pre-trained machine learning models with pythons transformers library (reviewProcessor/summarizer.py), reviews of each category were concatenated and summarized to uncover high level overviews of what specific issues customers experienced with each category.
-All of this data was imported into Power BI for visualization and further exploratory analysis.
+Each review data point includes the review rating, state, and date of submission. The full dataset was stored in a PostgreSQL database, enabling both efficient data management and initial exploratory analysis.
+
+To analyze customer sentiment and surface recurring themes, natural language processing (NLP) was performed using Python’s Natural Language Toolkit (NLTK) (reviewProcessor/postgreslink.py). Reviews were concatenated, cleaned, and preprocessed, and then analyzed through various filtering contexts to identify patterns in language use. The analysis focused on the frequency of trigrams—three-word sequences—which provided valuable insights into commonly mentioned issues.
+
+These trigrams were then categorized into overarching themes based on linguistic similarity. To further understand the nature of customer concerns, pre-trained transformer-based machine learning models (via the transformers library in reviewProcessor/summarizer.py) were used to summarize each thematic category, producing concise overviews of specific issues.
+
+All processed data was integrated into Power BI to enable interactive visualization and deeper exploratory analysis.
 
 ### Technologies
 * Python
@@ -54,10 +55,13 @@ Review ratings show a downward trend across time with an average review rating t
 
 <img src="images/RatingsTrend.png" alt="ratings chart" width='78%' heigth='auto'>
 
-An area of interest is the period of decline around 2015. Therefore, an analysis of reviews is focused on comparing content of reviews before and after this period of decline to attempt to uncover what driving factors might be the cause of this decline.
-Reviews were filtered based on contexts of bad reviews (1 star reviews) and good reviews (5 star reviews) as well as reviews before 2016 and after 2016.
-After concatenating and preprocessing reviews for natural language processing with python's nltk library, a list of ngrams (consecutive word groups of n words long) were extracted into a list of 100 most frequent ngrams.
-Trigrams (ngrams of 3 words long) were found to reveal the most information as well as uncover product level information because many Starbucks drink names are exactly 3 words in length.
+A key area of interest is the notable decline in customer satisfaction beginning around 2015. To better understand the potential causes, a comparative analysis was conducted on review content before and after 2016.
+
+Reviews were segmented by both sentiment (focusing specifically on 1-star and 5-star reviews) and time period (pre-2016 vs. post-2016). This approach aimed to isolate shifts in customer feedback that may have contributed to the decline in overall ratings.
+
+Following concatenation and preprocessing using Python’s Natural Language Toolkit (NLTK), n-grams—sequences of n consecutive words—were extracted. From these, the 100 most frequent n-grams were identified for each review segment. Among the various n-gram lengths, trigrams (3-word phrases) proved to be the most informative. In addition to surfacing high-level themes, trigrams also provided valuable product-level insights, as many Starbucks drink names naturally consist of three words.
+
+This analysis offered a more detailed understanding of the specific concerns and expectations expressed by customers during this critical period, helping to guide both strategic and operational recommendations.
 
 <img src="images/positivetrigrams.png" alt="relative increase chart" width='30.5%' heigth='auto'><img src="images/negativetrigrams.png" alt="relative increase chart" width='30%' heigth='auto'>
 
@@ -65,36 +69,61 @@ Many similar trigrams, such as "made drink wrong" and "got order wrong", were pl
 
 <img src="images/PercentageofMentions.png" alt="ratings chart" width='70%' heigth='auto'>
 
-From this graph, one could posit that customer service being the most dominant issue is where the company needs to focus its resources. It's hard to disagree that quality of customer is central to any client facing operation but the goal in this analysis is to uncover any trends across time that may correlate with declines in customer satisfaction and thus in financial performance.
-Comparing the relative increase in frequency of each category before and after 2016 tells a different and more accurate story.
+While the accompanying graph highlights customer service as the most frequently cited issue, suggesting it as an obvious focal point for resource allocation, this observation alone may be misleading. It is widely accepted that high-quality customer service is foundational to any client-facing business, including Starbucks. However, the primary objective of this analysis is not merely to identify the most commonly mentioned issues—it is to uncover trends over time that correlate with declines in customer satisfaction, which may in turn impact financial performance.
+
+A deeper, more informative perspective emerges when analyzing the relative increase in issue frequency before and after 2016. This time-based comparison reveals which categories have become significantly more problematic, offering a more accurate and actionable view of the evolving customer experience.
 
 <img src="images/RelativeIncrease.png" alt="relative increase chart" width='58%' heigth='auto'>
 
-From this graph we can see that wait times saw the largest increase in negative reviews before and after 2016 followed by order correctness, drive-through, and then lastly customer service.
-This indicates that increased wait times is the largest driver of decline in average review ratings and therefore the area in which Starbucks should consider focusing on improving.
+The data clearly shows that wait times experienced the largest increase in negative mentions before and after 2016, followed by order correctness, drive-thru experience, and finally, customer service. This suggests that longer wait times are the primary driver behind the declining average review ratings and should be considered a top priority for operational improvement.
 
-Further natural language processing when filtering for each category with python's transformers library, which enables the use of pre-trained machine learning models to summarize text, helps to corroborate this statement.
-For instance, summarizing blocks of concatenated negative reviews into summarizer.py that mention the drive through, and then recursively concatenating summaries for further processing by summarizer.py show that the underlying issues customers encountered with the drive through specifically, were that of long wait times followed by that of incorrect orders.
-The same results were found with a category that only shows up from 2019 and onward, a new mobile ordering system that consistently was linked with long wait times (customers noticed several in store orders being made and completed even after their pickup time) and incorrect orders.
+To further validate these findings, additional natural language processing was conducted using Python’s transformers library, which applies pre-trained machine learning models to summarize large volumes of text. For example, when negative reviews related to the drive-thru were concatenated and summarized using summarizer.py, and those summaries were recursively processed for higher-level abstraction, the core complaints were revealed to be long wait times, followed by incorrect orders.
+
+A similar pattern was observed in reviews referencing the mobile ordering system, a feature introduced in 2019. Although this category only emerged in recent years, the primary frustrations remained consistent: customers reported waiting significantly past their designated pickup times, often observing in-store orders being fulfilled ahead of their mobile orders. Additionally, these reviews frequently mentioned order inaccuracies, mirroring the trends seen in the drive-thru experience.
+
+These findings strongly suggest that, while multiple issues contribute to negative sentiment, operational inefficiencies—particularly around wait times and order accuracy—are the root causes. Addressing these could lead to meaningful improvements in both customer satisfaction and brand perception.
 
 ## Recommendations
-Therefore, we believe that in focusing attention in two main areas, improving wait times and reducing the amount of incorrect orders, we will see the greatest improvement in customer satisfaction.
-For improving wait times we suggest increased staffing during peak hours using further analysis with staffing, scheduling and business activity data to see in what regions and at what times we need to increase staff to meet customer demand. Also, a better system of prioritizing orders between the drive through, mobile orders, and in store orders should be considered in order to reduce wait times.
-For reducing the amount of incorrect orders we suggest simplifying the menu to allow for a more streamline environment and less confusion for staff and customers alike, while also taking into consideration not to leave out long term customers who choose starbucks for particularly complex drink orders.
+Based on our findings, we recommend focusing on two primary areas to drive the greatest improvement in customer satisfaction:
 
-Furthermore, in our view, undertaking both of these measures is likely to positively influence each other. Increased staffing and improved prioritizing of orders is likely to lead to employees not being overwhelmed and thus more care taken in ensuring orders are fulfilled correctly. Likewise, Simplifying the menu is likely to lead to a more streamlined operation and reduce wait times.
+1. Reducing Wait Times
 
-Additionally, solely focusing on customer service through staff training for example, may only cause frustration for both staff and customers alike, if root causes of customer satisfaction are other issues.
+2. Improving Order Accuracy
+
+To address wait times, we suggest:
+
+* Increasing staffing levels during peak hours, informed by further analysis of scheduling, staffing, and business activity data. This will help identify specific regions and timeframes where additional staffing is most needed to meet demand.
+
+* Implementing an improved order prioritization system across drive-thru, mobile, and in-store channels to optimize throughput and reduce overall customer wait times.
+
+To reduce incorrect orders, we propose:
+
+* Simplifying the menu to create a more efficient and less error-prone environment for both staff and customers. Any menu adjustments should be made carefully to retain popular, complex orders that appeal to Starbucks’ long-term, loyal customers.
+
+Importantly, we believe these two strategies are mutually reinforcing:
+
+* Enhanced staffing and better order prioritization are likely to reduce employee overload, leading to greater attention to detail and fewer mistakes.
+
+* A simplified menu will support more efficient operations, which can contribute to shorter wait times and a higher overall service quality.
+
+Finally, we advise caution against an overreliance on customer service training alone. While service quality is important, efforts focused solely on interpersonal interactions may not resolve the operational root causes—such as long waits and order inaccuracies—that are at the heart of customer dissatisfaction. Without addressing these core issues, additional training may lead to staff frustration and limited impact on the customer experience.
 
 ## Findings worth further analysis
-From this data, further product level analysis could be conducted for certain drinks that show up in the trigrams list. The use of trigrams is especially useful for this case because many Starbucks drinks are exactly three words in length. For instance, the nitro cold brew is a trigram that appears a lot in positive reviews, and the white chocolate macchiato is a trigram that appears a lot in negative reviews. If we choose to simplify the menu, then product level analysis of review data combined with sales data may uncover further insights and help direct such a project.
+Further product-level analysis could provide valuable insights, particularly for drinks identified in the trigram analysis. This approach is especially effective given that many Starbucks beverages consist of three-word names. For example, "Nitro Cold Brew" frequently appears in positive reviews, while "White Chocolate Macchiato" is often mentioned in negative reviews.
 
-It is worth noting that average review rating varied across different states.
+Should Starbucks decide to pursue a menu simplification initiative, conducting a deeper analysis by combining review data with sales data could uncover actionable insights. This would help identify which products are most associated with customer satisfaction or dissatisfaction, guiding decisions about which items to retain or modify.
+
+Additionally, it is important to note that average review ratings varied across different states, which may point to regional preferences or operational differences. Further investigation into state-level trends could reveal regional drivers of customer sentiment, offering additional opportunities for targeted improvements.
 
 <img src="images/TopStates.png" alt="relative increase chart" width='50%' heigth='auto'><img src="images/BottomStates.png" alt="relative increase chart" width='50%' heigth='auto'>
 
 Comparing data and collecting additional data from stores that show the highest level of customer satisfaction (Pennsylvania and Maryland) to stores that show the lowest level of customer satisfaction (New Mexico, Mississippi, West Virginia, and New Hampshire) may lead to beneficial insights as to any store or regional differences that lead to positive or negative customer experiences.
 
 ## Weaknesses of analysis
-There is a large variance in total reviews collected between states and thus more reviews still need to be collected from states with few reviews in order to gain a better resolution of state by state performance.
-Furthermore, depending on the technique and methods of natural language processing, the analysis of reviews in this way can lead to qualitative data and care should be taken when reaching conclusions. For instance, the use of trigrams in revealing common customer complaints may filter out more nuanced complaints that can't easily be expressed or summarized in such few words.
+Several limitations should be considered when interpreting the findings:
+
+1. State-Level Variability: There is significant variance in the number of reviews collected across states. As a result, some states have fewer data points, which limits the resolution of state-by-state performance insights. To achieve a more accurate understanding, additional reviews should be gathered from states with lower sample sizes.
+
+2. Limitations of Natural Language Processing (NLP): The use of natural language processing techniques—particularly trigrams—is a powerful tool for identifying common patterns, but it also has limitations. Trigrams, by nature, capture relatively short, high-frequency phrases, which can exclude more subtle or complex customer complaints that may not be easily conveyed in just three words. Therefore, while trigrams help surface the most prevalent issues, they may miss nuanced or context-specific concerns that are critical to the customer experience.
+
+Given these limitations, care must be taken when drawing conclusions from the analysis, ensuring that any strategic decisions are based on a comprehensive understanding of both the qualitative and quantitative data.
