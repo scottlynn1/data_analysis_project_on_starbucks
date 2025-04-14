@@ -9,6 +9,8 @@ Starbucks revenue for the quarter ending September 30, 2024 was $9.074B, a 3.2% 
 ## Project Description
 This project obtains a real world data set through scraping tens of thousands of Yelp reviews of Starbucks stores across the United States of America and attempts to derive insights and reveal correlations, if any, between customer satisfaction with the coffee chain and its recent financial performance by analyzing overall trends in customer satisfaction and using natural language processing to uncover finer details as to what is influencing sentiment.
 
+The costum UI with LLM integration created for this database of reviews can be found [here](https://project1.scottlynn.live)
+
 ## Executive Summary
 Customer satisfaction across Starbucks locations in the United States currently averages 2.95 out of 5 stars, reflecting a notable decline over time. From 2010 to 2014, the average rating stood at 3.36 stars, but has since dropped to 2.85 stars as of 2024. The most significant year-over-year decline occurred between 2015 and 2016.
 
